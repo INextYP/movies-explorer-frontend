@@ -9,7 +9,7 @@ const initialMovies = [
     id: 2,
     title: 'Киноальманах «100 лет дизайна»',
     image: 'https://i.postimg.cc/SQH54FFS/pic-COLOR-pic2.png',
-    duration: '1ч 42м',
+    duration: '1ч 43м',
   },
   {
     id: 3,
