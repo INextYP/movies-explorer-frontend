@@ -1,0 +1,101 @@
+.movie {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie__img {
+  width: 100%;
+  height: 151px;
+}
+
+.movie__description {
+  width: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px auto 29px;
+}
+
+.movie__name {
+  margin: 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
+}
+
+.movie__button-favorite-add {
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  width: 24px;
+  height: 24px;
+  background: #313131 url("../../images/favofite__icon_inactive.svg") no-repeat center center;
+  transition: opacity .7s ease-in-out;
+  cursor: pointer;
+}
+
+.movie__button-favorite-add_active {
+  background: #313131 url("../../images/favoriye__icon.svg") no-repeat center center;
+}
+
+.movie__button-favorite-delete {
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  width: 24px;
+  height: 24px;
+  transition: opacity .7s ease-in-out;
+  cursor: pointer;
+}
+
+.movie__button-favorite-delete:hover {
+  background: #313131 url("../../images/unfovorite__icon.svg") no-repeat center center;
+  opacity: .5;
+}
+
+.movie__button-favorite-add:hover {
+  opacity: .5;
+}
+
+.movie__duration {
+  color: #8B8B8B;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  margin: 0;
+  border-top: 1px solid #424242;
+  padding-top: 6px;
+}
+
+@media screen and (max-width: 890px) {
+  .movie__img {
+    height: 190px;
+  }
+
+  .movie__description {
+    margin-left: 0;
+    margin-right: 0;
+    width: 339px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .movie__description {
+    width: 300px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .movie__duration {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}

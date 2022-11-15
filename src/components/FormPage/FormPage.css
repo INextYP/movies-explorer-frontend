@@ -1,0 +1,152 @@
+.section-form {
+  display: flex;
+  flex-direction: column;
+  padding: 70px 0;
+  max-width: 396px;
+  margin: 0 auto;
+}
+
+.section-form__logo {
+  justify-content: start;
+}
+
+.form__head {
+  margin: 40px 0 40px 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.form__input-container {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.form__label-text {
+  color: #8B8B8B;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  margin: 0 0 5px 0;
+}
+
+.form__label:first-child {
+  border: none;
+  padding: 0;
+}
+
+.form__field {
+  width: 396px;
+  margin: 0;
+  border: none;
+  background: transparent;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #424242;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.form__field_place_auth {
+  margin-bottom: 24px;
+}
+
+ .form__field:focus {
+  outline: none;
+  border-bottom: 1px solid #4285F4;
+}
+
+.form__item-error {
+  display: none;
+}
+
+.form__submit-button {
+  width: 396px;
+  height: 45px;
+  border: none;
+  background-color: #4285F4;
+  border-radius: 3px;
+  margin: 128px 0 16px 0;
+  padding: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form__question {
+  text-align: center;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #8B8B8B;
+}
+
+.form__link {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #4285F4;
+  text-decoration: none;
+  margin-left: 6px;
+  transition: opacity .7s ease-in-out;
+}
+
+.section-form__link {
+  transition: opacity .7s ease-in-out;
+}
+
+.section-form__link:hover {
+  opacity: .5;
+}
+
+.form__link:hover {
+  opacity: .5;
+}
+
+.form__submit-button_place_auth {
+  margin-top: 197px;
+}
+
+.form__auth {
+  width: 396px;
+}
+
+@media screen and (max-width: 400px) {
+  .section-form {
+    max-width: 260px;
+    align-items: center;
+    padding: 56px 0 30px 0;
+  }
+
+  .form__head {
+    text-align: center;
+    margin: 50px 0 80px 0;
+  }
+
+  .form__auth {
+    width: 260px;
+  }
+
+  .form__field {
+    width: 260px;
+  }
+
+  .form__submit-button_place_auth {
+    margin-top: 249px;
+    margin-bottom: 14px;
+    width: 260px;
+  }
+
+  .form__question {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .form__link {
+    font-size: 12px;
+    line-height: 15px;
+    margin-left: 7px;
+  }
+}

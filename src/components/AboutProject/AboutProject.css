@@ -1,0 +1,154 @@
+.about {
+  background-color: #202020;
+  padding: 110px 0;
+}
+
+.about__container {
+  margin: 0 auto;
+  max-width: 1140px;
+}
+
+.about__content {
+  display: flex;
+}
+
+.about__info-container {
+  max-width: 550px;
+}
+
+.about__info-title {
+  margin: 70px 0 26px 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.about__info-text {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.about__period-line {
+  margin-top: 110px;
+}
+
+.about__period-line:first-of-type {
+  width: 20%;
+  text-align: center;
+}
+
+.about__period-line:last-of-type {
+  width: 80%;
+  text-align: center;
+}
+
+.about__period-line-title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 9px 14px;
+  background-color: #303030;
+}
+
+.about__period-line-title_color_green {
+  background-color: #3DDC84;
+  color: #000;
+}
+
+.about__period-line-text {
+  margin: 14px 0 0 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #8B8B8B
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .about__container {
+    max-width: 668px;
+  }
+
+  .about__info-title {
+    margin-bottom: 22px;
+  }
+
+  .about__info-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about__period-line {
+    margin-top: 93px;
+  }
+
+  .about__period-line-text {
+    color: #A0A0A0;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .about {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .about__container {
+    max-width: 284px;
+  }
+
+  .about__content:first-of-type {
+    display: block;
+  }
+
+  .about__info-title {
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about__info-title:first-child {
+    margin-top: 60px;
+  }
+
+  .about__info-title:last-child {
+    margin-top: 56px;
+  }
+
+  .about__period-line {
+    margin-top: 60px;
+  }
+
+  .about__period-line-title {
+    padding: 10px 11px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about__period-line:first-of-type {
+    width: 35%;
+  }
+
+  .about__period-line:last-of-type {
+    width: 65%;
+  }
+
+  .about__period-line-text {
+    font-size: 11px;
+    line-height: 13px;
+    margin-top: 10px;
+  }
+
+  .about__info-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
