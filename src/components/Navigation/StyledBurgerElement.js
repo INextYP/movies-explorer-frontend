@@ -6,7 +6,7 @@ const StyledBurger = styled.button`
 
   @media screen and (max-width: 768px) {
     position: absolute;
-    top: 5%;
+    top: 3%;
     right: 3%;
     display: flex;
     flex-direction: column;
