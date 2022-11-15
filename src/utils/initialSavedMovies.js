@@ -1,17 +1,20 @@
 const initialSavedMovies = [
   {
-    title: 'Архыз',
-    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+    id: 1,
+    title: '33 слова о дизайне',
+    image: 'https://i.postimg.cc/gr93TH7p/pic-COLOR-pic.png',
     duration: '1ч 42м',
   },
   {
-    title: 'Челябинская область',
-    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+    id: 2,
+    title: 'Киноальманах «100 лет дизайна»',
+    image: 'https://i.postimg.cc/SQH54FFS/pic-COLOR-pic2.png',
     duration: '1ч 42м',
   },
   {
-    title: 'Иваново',
-    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+    id: 3,
+    title: 'В погоне за Бенкси',
+    image: 'https://i.postimg.cc/DysNyjnq/pic-COLOR-pic3.png',
     duration: '1ч 42м',
   },
 ];

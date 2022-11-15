@@ -16,7 +16,7 @@ function MoviesCardList({ movies }) {
     <section className={`movies__section ${pathname === '/saved-movies' ? 'movies__section_place_saved-movies' : ''}`}>
       <ul className="movies__list">
         {movies.map((movie) => (
-          <MoviesCard movie={movie}/>))}
+          <MoviesCard key={movie.id} movie={movie}/>))}
       </ul>
       {isLoading ? (<Preloader />) : (pathname !== '/saved-movies'
         && <div className="movies__button-container">
