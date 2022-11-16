@@ -1,0 +1,11 @@
+.App {
+  background-color: #073042;
+  min-height: 100vh;
+  min-width: 320px;
+  font-family: Inter,Arial,sans-serif;
+  color: #fff;
+}
+
+.App_theme_dark {
+  background-color: #202020;
+}
