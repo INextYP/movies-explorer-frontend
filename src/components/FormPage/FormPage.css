@@ -107,6 +107,11 @@
 
 .form__submit-button_place_auth {
   margin-top: 197px;
+  transition: opacity .7s ease-in-out;
+}
+
+.form__submit-button_place_auth:hover {
+  opacity: .5;
 }
 
 .form__auth {

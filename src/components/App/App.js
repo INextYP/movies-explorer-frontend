@@ -7,6 +7,7 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import Footer from '../Footer/Footer';
 
 function App() {
   const { pathname } = useLocation();
@@ -17,14 +18,17 @@ function App() {
         <Route exact path="/">
           <Header loggedIn={false}/>
           <Main/>
+          <Footer/>
         </Route>
         <Route path="/movies">
           <Header loggedIn={true}/>
           <Movies />
+          <Footer />
         </Route>
         <Route exact path="/saved-movies">
           <Header loggedIn={true}/>
           <SavedMovies />
+          <Footer />
         </Route>
         <Route exact path="/sign-up">
           <Register/>

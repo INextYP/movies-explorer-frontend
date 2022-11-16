@@ -67,14 +67,22 @@
   color: #8B8B8B
 }
 
+@media screen and (max-width: 1155px) {
+  .about__container {
+    max-width: 900px;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .about__container {
+    max-width: 660px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .about {
     padding-top: 90px;
     padding-bottom: 90px;
-  }
-
-  .about__container {
-    max-width: 668px;
   }
 
   .about__info-title {

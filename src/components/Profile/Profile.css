@@ -77,12 +77,22 @@
   color: #fff;
   text-decoration: none;
   margin: 0 0 16px 0;
+  transition: opacity .7s ease-in-out;
+}
+
+.profile__edit-button:hover {
+  opacity: .5;
 }
 
 .profile__exit-link {
   font-weight: 500;
   color: #EE3465;
   text-decoration: none;
+  transition: opacity .7s ease-in-out;
+}
+
+.profile__exit-link:hover {
+  opacity: .5;
 }
 
 @media screen and (max-width: 890px) {

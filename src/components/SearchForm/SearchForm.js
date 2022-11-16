@@ -14,7 +14,6 @@ function SearchForm() {
           <p className="search-form__checkbox-text">Короткометражки</p>
         </div>
       </div>
-
     </form>
   );
 }

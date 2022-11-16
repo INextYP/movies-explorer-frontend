@@ -41,6 +41,11 @@
   text-decoration: none;
   display: flex;
   align-items: center;
+  transition: opacity .7s ease-in-out;
+}
+
+.navigation__link:hover {
+  opacity: .5;
 }
 
 .navigation__link_active {
@@ -58,6 +63,7 @@
 .burger-menu__link_active {
   border-bottom: 2px solid #fff;
   color: #FFF;
+  padding: 0 0 4px 0;
 }
 
 @media screen and (max-width: 768px) {

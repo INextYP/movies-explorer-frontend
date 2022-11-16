@@ -59,14 +59,22 @@
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
+@media screen and (max-width: 1155px) {
+  .about-me__container {
+    max-width: 900px;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .about-me__container {
+    max-width: 660px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .about-me {
     padding-top: 90px;
     padding-bottom: 90px;
-  }
-
-  .about-me__container {
-    max-width: 668px;
   }
 
   .about-me__info {

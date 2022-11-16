@@ -23,6 +23,11 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
+  transition: opacity .7s ease-in-out;
+}
+
+.navigation-promo__list-item-link:hover {
+  opacity: .5;
 }
 
 @media screen and (max-width: 400px) {

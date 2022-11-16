@@ -12,6 +12,11 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  transition: opacity .7s ease-in-out;
+}
+
+.nav-tab__link:hover {
+  opacity: .5;
 }
 
 .nav-tab__list-item:first-child {

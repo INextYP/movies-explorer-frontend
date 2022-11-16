@@ -86,17 +86,12 @@ const StyledMenu = styled.nav`
     }
 
     :first-child {
-      margin-top: auto;
+      margin-top: 159px;
     }
 
     :last-child {
       margin-top: auto;
       margin-bottom: 92px;
-    }
-
-    @media (max-width: 576px) {
-      font-size: 1.5rem;
-      text-align: center;
     }
 
     &:hover {
@@ -105,7 +100,7 @@ const StyledMenu = styled.nav`
   }
 
   .burger-menu__link_type_account {
-    align-self: end;
+    align-items: center;
   }
 `;
 
