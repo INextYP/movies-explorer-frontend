@@ -1,7 +1,8 @@
 
 
+# Ссылка на [макет](https://www.figma.com/file/kE5ZSNe1s3NjuzWeWcPBsW/Diploma))))))))))))))))))))))))).?node-id=932%3A4079&t=Bsyxn7NwCewyeYEX-1).
 
-# Ссылка на макет: https://www.figma.com/file/kE5ZSNe1s3NjuzWeWcPBsW/Diploma))))))))))))))))))))))))).?node-id=932%3A4079&t=Bsyxn7NwCewyeYEX-1
+# Ссылка на [Сайт](https://react.movies.nomoredomains.club/).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
