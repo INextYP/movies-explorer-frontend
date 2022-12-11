@@ -13,7 +13,7 @@ function Register({ handleRegister }) {
   };
 
   return (
-    <FormPage name='registration' title="Добро пожаловать!" buttonText="Зарегистрироваться" question="Уже зарегистрированы?" path="/sign-in" link="Войти" handleSubmit={handleSubmit} isValid={!isValid}>
+    <FormPage name='registration' title="Добро пожаловать!" buttonText="Зарегистрироваться" question="Уже зарегистрированы?" path="/sign-in" link="Войти" handleSubmit={handleSubmit} isValid={isValid}>
       <label className="form__label form__label_place_auth">
         <h3 className="form__label-text">Имя</h3>
         <input type="text" placeholder='Имя' name='name' className="form__field form__field_place_auth" defaultValue={values.name || ''} onChange={handleChange} required />
