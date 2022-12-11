@@ -73,6 +73,9 @@
 }
 
 .profile__edit-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
   font-weight: 400;
   color: #fff;
   text-decoration: none;
@@ -84,7 +87,16 @@
   opacity: .5;
 }
 
+.profile__edit-button_type_inactive {
+  color: #C2C2C2;
+  pointer-events: none;
+  user-select: none;
+}
+
 .profile__exit-link {
+  background: transparent;
+  border: none;
+  cursor: pointer;
   font-weight: 500;
   color: #EE3465;
   text-decoration: none;

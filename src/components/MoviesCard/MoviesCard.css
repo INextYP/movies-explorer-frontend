@@ -1,6 +1,10 @@
 .movie {
-  display: flex;
+  display: none;
   flex-direction: column;
+}
+
+.movie_type_visible {
+  display: flex;
 }
 
 .movie__img {
@@ -9,7 +13,7 @@
 }
 
 .movie__description {
-  width: 270px;
+  width: 332px;
   display: flex;
   align-items: center;
   justify-content: space-between;

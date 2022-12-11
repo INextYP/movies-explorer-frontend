@@ -7,6 +7,22 @@
   border-bottom: 1px solid #424242;
 }
 
+.search-form__checkbox-text-error {
+  display: none;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 18px;
+  color: #FF004C;
+  text-align: center;
+}
+
+.search-form__checkbox-text-error_status_visible {
+  display: block;
+  position: absolute;
+  bottom: 40%;
+  right: 45%;
+}
+
 .search-form__input {
   width: 100%;
   height: 46px;
@@ -110,6 +126,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
+  position: relative;
 }
 
 @media screen and (max-width: 768px) {
