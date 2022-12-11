@@ -18,7 +18,10 @@ function SavedMovies({
   return (
     <main className="saved-movies">
       <SearchForm onSortMovies={setIsChecked} errorsText={errorsText} />
-      <MoviesCardList movies={isChecked ? sortMovies : savedMovies} handleCardLike={handleCardLike} handleCheckLikeStatusSavedMovies={handleCheckLikeStatusSavedMovies} />
+      <MoviesCardList
+        movies={isChecked ? sortMovies : savedMovies}
+        handleCardLike={handleCardLike}
+        handleCheckLikeStatusSavedMovies={handleCheckLikeStatusSavedMovies} />
     </main>
   );
 }

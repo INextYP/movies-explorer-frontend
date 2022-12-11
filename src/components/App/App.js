@@ -148,6 +148,7 @@ function App() {
   };
 
   const handleSearchMovies = (keyword) => {
+    // eslint-disable-next-line max-len
     const searchMoviesResult = movies.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()));
     if (searchMoviesResult.length === 0) {
       setErrors({ searchError: 'По вашему запросу ничего не найдено.', sortError: '', updateUserError: '' });
@@ -184,8 +185,10 @@ function App() {
 
   const handleRemoveSavedMovies = (movie) => {
     mainApi
+      // eslint-disable-next-line no-underscore-dangle
       .deleteSavedMovie(movie._id)
       .then((res) => {
+        // eslint-disable-next-line no-underscore-dangle
         setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
       })
       .catch((err) => console.log(err));
