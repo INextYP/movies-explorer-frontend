@@ -16,8 +16,8 @@ function Login({ handleLogin }) {
     <FormPage name='login' title="Рады видеть!" buttonText="Войти" question="Ещё не зарегистрированы?" path="/sign-up" link="Регистрация" handleSubmit={handleSubmit} isValid={isValid}>
       <label className="form__label form__label_place_auth">
         <h3 className="form__label-text">E-mail</h3>
-        <input type="email" name='email' placeholder='E-mail' className="form__field form__field_place_auth" required value={values.email || ''} onChange={handleChange} />
-        <p className="form__item-error">Что-то пошло не так...</p>
+        <input type="email" name='email' placeholder='E-mail' className="form__field form__field_place_auth" required value={values.email || ''} onChange={handleChange} pattern='^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+\.+[a-zA-Z]{2,}$' />
+        <p className={`form__item-error ${errors.email && 'form__item-error_active'}`}>{errors.email}</p>
       </label>
       <label className="form__label form__label_place_auth">
         <h3 className="form__label-text">Пароль</h3>

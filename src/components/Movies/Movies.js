@@ -17,11 +17,9 @@ function Movies({
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
-    if (isChecked) {
+    if (isChecked === true) {
       localStorage.setItem('sortResult', JSON.stringify(onSortMovies(movies)));
       localStorage.setItem('sortStatus', JSON.stringify(true));
-    } else {
-      localStorage.setItem('sortStatus', JSON.stringify(false));
     }
   }, [isChecked]);
 

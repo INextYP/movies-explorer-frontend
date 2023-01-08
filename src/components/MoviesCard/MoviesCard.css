@@ -61,8 +61,11 @@
 }
 
 .movie__button-favorite-delete:hover {
-  background: #313131 url("../../images/unfovorite__icon.svg") no-repeat center center;
   opacity: .5;
+}
+
+.movie:hover .movie__button-favorite-delete {
+  background: #313131 url("../../images/unfovorite__icon.svg") no-repeat center center;
 }
 
 .movie__button-favorite-add:hover {

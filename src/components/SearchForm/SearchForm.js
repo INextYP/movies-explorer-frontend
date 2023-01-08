@@ -19,11 +19,17 @@ function SearchForm({
   const onChangeCheckbox = (e) => {
     onCheckboxChecked(!isChecked);
     setIsChecked(e.target.checked);
+    if (isChecked && pathname === 'movies') {
+      localStorage.setItem('sortStatus', JSON.stringify(true));
+    } else {
+      localStorage.removeItem('sortStatus');
+      localStorage.removeItem('sortResult');
+    }
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (value === '') {
+    if (value === '' || value == null) {
       setIsError(true);
     } else {
       setIsError(false);
@@ -42,13 +48,24 @@ function SearchForm({
     if (pathname !== '/saved-movies') {
       setSearchSavedMovies([]);
       setValue(JSON.parse(localStorage.getItem('searchText')));
-      const getData = JSON.parse((localStorage.getItem('sortStatus')));
-      if (getData === true) {
-        onSortMovies(true);
-        setIsChecked(true);
-      }
     }
   }, [pathname]);
+
+  useEffect(() => {
+    if (pathname === '/movies' && localStorage.getItem('sortStatus')) {
+      onSortMovies(true);
+      setIsChecked(true);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    console.log(isChecked);
+    console.log(pathname);
+    if (isChecked === false && pathname === '/movies' && !localStorage.getItem('sortStatus')) {
+      onSortMovies(false);
+      setIsChecked(false);
+    }
+  }, [isChecked, pathname]);
 
   return (
     <form className="search-form" onSubmit={handleSubmit}>

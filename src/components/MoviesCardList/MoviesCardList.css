@@ -3,7 +3,7 @@
   padding: 0;
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(0, 366px));
   gap: 38px 20px;
 }
 
@@ -36,10 +36,9 @@
   margin-bottom: 240px;
 }
 
-@media screen and (max-width: 1142px) {
+@media screen and (max-width: 1170px) {
   .movies__list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    justify-items: center;
+    justify-content: center;
   }
 }
 

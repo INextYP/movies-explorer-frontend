@@ -39,10 +39,10 @@ function MoviesCardList({
   };
 
   const getCount = () => {
-    if (isWindowSize >= 890) {
+    if (isWindowSize >= 1138) {
       setIsMovieCount(12);
       setCurrentClickCount(3);
-    } else if (isWindowSize >= 723 && isWindowSize < 890) {
+    } else if (isWindowSize >= 723 && isWindowSize < 1138) {
       setIsMovieCount(8);
       setCurrentClickCount(2);
     } else {

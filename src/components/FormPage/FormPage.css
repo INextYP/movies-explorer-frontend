@@ -64,6 +64,10 @@
 
 .form__item-error_active {
   display: block;
+  margin: 0;
+  color: #EE3465;
+  font-size: 11px;
+  line-height: 13px;
 }
 
 .form__submit-button {

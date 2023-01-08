@@ -43,7 +43,6 @@ function App() {
       }
     }).catch((err) => {
       console.log(`Ошибка: ${err}`);
-      history.push('/');
     });
 
   useEffect(() => {
@@ -164,8 +163,9 @@ function App() {
     } else if (movies.length > 0 && !localStorage.getItem('isSavedSearch')) {
       setIsLoading(true);
       const whereSearchSort = JSON.parse(localStorage.getItem('sortResult'));
+      console.log(whereSearchSort);
       // eslint-disable-next-line max-len
-      const searchMoviesResult = whereSearchSort ? whereSearchSort.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()))
+      const searchMoviesResult = whereSearchSort && whereSearchSort.length !== 0 ? whereSearchSort.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()))
         : movies.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()));
       if (searchMoviesResult.length === 0) {
         setErrors({ searchError: 'По вашему запросу ничего не найдено.', sortError: '', updateUserError: '' });
@@ -215,7 +215,7 @@ function App() {
   const handleRemoveSavedMovies = (movie) => {
     // eslint-disable-next-line no-underscore-dangle
     if (movie.id) {
-      const getIdForInitialMovie = savedMovies.find((elem) => elem.name === movie.name);
+      const getIdForInitialMovie = savedMovies.find((elem) => elem.nameRU === movie.nameRU);
       mainApi
         // eslint-disable-next-line no-underscore-dangle
         .deleteSavedMovie(getIdForInitialMovie._id)
@@ -229,8 +229,10 @@ function App() {
         // eslint-disable-next-line no-underscore-dangle
         .deleteSavedMovie(movie._id)
         .then((res) => {
+          console.log(movie);
           // eslint-disable-next-line no-underscore-dangle
           setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
+          console.log(savedMovies);
         })
         .catch((err) => console.log(err));
     }
@@ -238,7 +240,6 @@ function App() {
 
   const handleCheckLikeStatus = (moviesData) => {
     const isLiked = savedMovies.some((i) => i.movieId === moviesData.id);
-    console.log(isLiked);
     return isLiked;
   };
 
