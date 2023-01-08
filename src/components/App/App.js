@@ -147,7 +147,9 @@ function App() {
           console.log(whereSearch);
           // eslint-disable-next-line max-len
           const searchMoviesResult = whereSearch
+            // eslint-disable-next-line max-len
             ? whereSearch.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()))
+            // eslint-disable-next-line max-len
             : initialMovies.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()));
           if (searchMoviesResult.length === 0) {
             setErrors({ searchError: 'По вашему запросу ничего не найдено.', sortError: '', updateUserError: '' });

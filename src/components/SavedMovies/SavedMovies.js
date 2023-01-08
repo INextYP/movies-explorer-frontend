@@ -29,9 +29,13 @@ function SavedMovies({
                   setSearchSavedMovies={setSearchSavedMovies}
       />
       <MoviesCardList
-        movies={isChecked ? sortMovies : searchSavedMovies.length > 0 ? searchSavedMovies : savedMovies}
+        // eslint-disable-next-line no-nested-ternary
+        movies={isChecked ? sortMovies
+          : searchSavedMovies.length > 0
+            ? searchSavedMovies
+            : savedMovies}
         handleCardLike={handleCardLike}
-        handleCheckLikeStatusSavedMovies={handleCheckLikeStatusSavedMovies} />
+        handleCheckLikeStatusSavedMovies={handleCheckLikeStatusSavedMovies}/>
     </main>
   );
 }
