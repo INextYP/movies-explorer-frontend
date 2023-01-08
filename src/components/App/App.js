@@ -23,11 +23,15 @@ function App() {
   const [errors, setErrors] = useState({
     searchError: '', sortError: '', updateUserError: '',
   });
+  const [message, setMessage] = useState({
+    updateUserMessage: '',
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
+  const [searchSavedMovies, setSearchSavedMovies] = useState([]);
   const { pathname } = useLocation();
   const history = useHistory();
 
@@ -43,18 +47,12 @@ function App() {
     });
 
   useEffect(() => {
-    tokenCheck();
+    getSavedMovies();
   }, [loggedIn]);
 
-  const getInitialMovies = () => {
-    moviesApi.getInitialMovies()
-      .then((res) => {
-        localStorage.setItem('moviesApi', JSON.stringify(res));
-        const initialMovies = JSON.parse(localStorage.getItem('moviesApi'));
-        setMovies(initialMovies);
-      })
-      .catch((err) => console.log(err));
-  };
+  useEffect(() => {
+    tokenCheck();
+  }, [loggedIn]);
 
   const getSavedMovies = () => {
     mainApi.getSavedMovies()
@@ -66,13 +64,6 @@ function App() {
   };
 
   useEffect(() => {
-    if (loggedIn || localStorage.getItem('moviesApi') || localStorage.getItem('savedMovies')) {
-      getInitialMovies();
-      getSavedMovies();
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
     const initialMovies = JSON.parse(localStorage.getItem('moviesApi'));
     if (initialMovies) {
       setMovies(initialMovies);
@@ -80,8 +71,6 @@ function App() {
       if (searchResult) {
         setSearchMovies(searchResult);
       }
-    } else {
-      getInitialMovies();
     }
   }, [loggedIn]);
 
@@ -107,8 +96,7 @@ function App() {
       .registration(name, email, password)
       .then((res) => {
         if (res) {
-          setLoggedIn(true);
-          history.push('/movies');
+          handleLoginUser({ email, password });
         }
       })
       .catch((err) => {
@@ -120,8 +108,7 @@ function App() {
   };
 
   const signOut = () => mainApi.logOut().then(() => {
-    localStorage.removeItem('moviesApi');
-    localStorage.removeItem('searchResult');
+    localStorage.clear();
     setCurrentUser({ name: '', email: '' });
     setSearchMovies([]);
     setMovies([]);
@@ -136,6 +123,7 @@ function App() {
       .setUserInfo({ name, email })
       .then((res) => {
         setCurrentUser({ name: res.name, email: res.email });
+        setMessage({ updateUserMessage: 'Данные успешно обновлены.' });
       })
       .catch((err) => {
         if (err.code === 400) {
@@ -148,14 +136,56 @@ function App() {
   };
 
   const handleSearchMovies = (keyword) => {
-    // eslint-disable-next-line max-len
-    const searchMoviesResult = movies.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()));
-    if (searchMoviesResult.length === 0) {
-      setErrors({ searchError: 'По вашему запросу ничего не найдено.', sortError: '', updateUserError: '' });
-    } else {
-      setErrors({ searchError: '', sortError: '', updateUserError: '' });
+    if (movies.length === 0) {
+      setIsLoading(true);
+      moviesApi.getInitialMovies()
+        .then((res) => {
+          localStorage.setItem('moviesApi', JSON.stringify(res));
+          const initialMovies = JSON.parse(localStorage.getItem('moviesApi'));
+          setMovies(initialMovies);
+          const whereSearch = JSON.parse(localStorage.getItem('sortResult'));
+          console.log(whereSearch);
+          // eslint-disable-next-line max-len
+          const searchMoviesResult = whereSearch
+            ? whereSearch.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()))
+            : initialMovies.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()));
+          if (searchMoviesResult.length === 0) {
+            setErrors({ searchError: 'По вашему запросу ничего не найдено.', sortError: '', updateUserError: '' });
+          } else {
+            setErrors({ searchError: '', sortError: '', updateUserError: '' });
+          }
+          setSearchMovies(searchMoviesResult);
+          localStorage.setItem('searchResult', JSON.stringify(searchMoviesResult));
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
+    } else if (movies.length > 0 && !localStorage.getItem('isSavedSearch')) {
+      setIsLoading(true);
+      const whereSearchSort = JSON.parse(localStorage.getItem('sortResult'));
+      // eslint-disable-next-line max-len
+      const searchMoviesResult = whereSearchSort ? whereSearchSort.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()))
+        : movies.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()));
+      if (searchMoviesResult.length === 0) {
+        setErrors({ searchError: 'По вашему запросу ничего не найдено.', sortError: '', updateUserError: '' });
+      } else {
+        setErrors({ searchError: '', sortError: '', updateUserError: '' });
+      }
+      setSearchMovies(searchMoviesResult);
+      localStorage.setItem('searchResult', JSON.stringify(searchMoviesResult));
+      setTimeout(() => setIsLoading(false), 1000);
     }
-    return searchMoviesResult;
+    if (localStorage.getItem('isSavedSearch')) {
+      setIsLoading(true);
+      // eslint-disable-next-line max-len
+      const searchMoviesResult = savedMovies.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()));
+      if (searchMoviesResult.length === 0) {
+        setErrors({ searchError: 'По вашему запросу ничего не найдено.', sortError: '', updateUserError: '' });
+      } else {
+        setErrors({ searchError: '', sortError: '', updateUserError: '' });
+      }
+      setSearchSavedMovies(searchMoviesResult);
+      setTimeout(() => setIsLoading(false), 1000);
+    }
   };
 
   const handleSortMovies = (moviesForSort) => {
@@ -168,34 +198,45 @@ function App() {
     return sortMoviesResult;
   };
 
-  const handleSubmitSearch = (keyword) => {
-    setSearchMovies(handleSearchMovies(keyword));
-    localStorage.setItem('searchResult', JSON.stringify(handleSearchMovies(keyword)));
-  };
-
   const handleAddSavedMovies = (data) => {
     mainApi
       .addSavedMovie(data)
       .then((dataMovies) => {
-        setSavedMovies([dataMovies, ...savedMovies]);
+        const dataSavedMovies = dataMovies;
+        dataSavedMovies.id = `${data.id}`;
+        setSavedMovies([dataSavedMovies, ...savedMovies]);
         localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
       })
       .catch((err) => console.log(err));
   };
 
   const handleRemoveSavedMovies = (movie) => {
-    mainApi
-      // eslint-disable-next-line no-underscore-dangle
-      .deleteSavedMovie(movie._id)
-      .then((res) => {
+    // eslint-disable-next-line no-underscore-dangle
+    if (movie.id) {
+      const getIdForInitialMovie = savedMovies.find((elem) => elem.name === movie.name);
+      mainApi
         // eslint-disable-next-line no-underscore-dangle
-        setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
-      })
-      .catch((err) => console.log(err));
+        .deleteSavedMovie(getIdForInitialMovie._id)
+        .then((res) => {
+          // eslint-disable-next-line no-underscore-dangle
+          setSavedMovies((state) => state.filter((c) => c._id !== getIdForInitialMovie._id));
+        })
+        .catch((err) => console.log(err));
+    } else {
+      mainApi
+        // eslint-disable-next-line no-underscore-dangle
+        .deleteSavedMovie(movie._id)
+        .then((res) => {
+          // eslint-disable-next-line no-underscore-dangle
+          setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleCheckLikeStatus = (moviesData) => {
     const isLiked = savedMovies.some((i) => i.movieId === moviesData.id);
+    console.log(isLiked);
     return isLiked;
   };
 
@@ -222,10 +263,12 @@ function App() {
           <Movies
             errorsText={errors}
             movies={searchMovies}
-            onSubmitSearch={handleSubmitSearch}
+            onSubmitSearch={handleSearchMovies}
             onSortMovies={handleSortMovies}
             handleCardLike={handleCardLike}
             handleCheckLikeStatus={handleCheckLikeStatus}
+            isLoading={isLoading}
+            setSearchSavedMovies={setSearchSavedMovies}
           />
           <Footer />
         </ProtectedRoute>
@@ -234,16 +277,22 @@ function App() {
           <SavedMovies
             errorsText={errors}
             savedMovies={savedMovies}
-            onSubmitSearch={handleSubmitSearch}
+            searchSavedMovies={searchSavedMovies}
+            onSubmitSearch={handleSearchMovies}
             onSortMovies={handleSortMovies}
             handleCardLike={handleCardLike}
             handleCheckLikeStatusSavedMovies={handleCheckLikeStatusSavedMovies}
+            isLoading={isLoading}
+            setSearchSavedMovies={setSearchSavedMovies}
           />
           <Footer />
         </ProtectedRoute>
         <ProtectedRoute exact path="/profile" loggedIn={loggedIn} >
           <Header loggedIn={loggedIn}/>
-          <Profile onEditProfile={handleUpdateUser} onSignOut={signOut} />
+          <Profile onEditProfile={handleUpdateUser}
+                   onSignOut={signOut}
+                   successMessage={message}
+                   errorMessage={errors} />
         </ProtectedRoute>
         <Route path="/sign-up">
           <Register handleRegister={handleRegistrationUser} />

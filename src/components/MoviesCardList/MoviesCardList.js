@@ -4,7 +4,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList({
-  movies, handleCardLike, handleCheckLikeStatus, handleCheckLikeStatusSavedMovies,
+  movies, handleCardLike, handleCheckLikeStatus, handleCheckLikeStatusSavedMovies, isLoading,
 }) {
   const { pathname } = useLocation();
 
@@ -16,13 +16,13 @@ function MoviesCardList({
 
   const [renderMovies, setRenderMovies] = useState(isMovieCount);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const defaultMovies = movies.slice(0, renderMovies);
 
   const handleDisplayPreloader = () => {
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 1000);
+    setIsLoadingMore(true);
+    setTimeout(() => setIsLoadingMore(false), 1000);
   };
 
   const handleTimeout = () => {
@@ -39,10 +39,10 @@ function MoviesCardList({
   };
 
   const getCount = () => {
-    if (isWindowSize > 768) {
+    if (isWindowSize >= 890) {
       setIsMovieCount(12);
       setCurrentClickCount(3);
-    } else if (isWindowSize > 660 && isWindowSize <= 768) {
+    } else if (isWindowSize >= 723 && isWindowSize < 890) {
       setIsMovieCount(8);
       setCurrentClickCount(2);
     } else {
@@ -64,25 +64,27 @@ function MoviesCardList({
   }, []);
 
   return (
-    <section className={`movies__section ${pathname === '/saved-movies' ? 'movies__section_place_saved-movies' : ''}`}>
-        <ul className="movies__list">
-          {pathname === '/movies' && defaultMovies.map((movie) => (
-            <MoviesCard key={movie.id}
-                        movie={movie}
-                        handleCardLike={handleCardLike}
-                        handleCheckLikeStatus={handleCheckLikeStatus}
-            />))}
-          {pathname === '/saved-movies' && movies.map((movie) => (
-            <MoviesCard key={movie.movieId}
-                        movie={movie}
-                        visibleMovies={true}
-                        handleCardLike={handleCardLike}
-                        handleCheckLikeStatusSavedMovies={handleCheckLikeStatusSavedMovies}/>))}
-        </ul>
-          {(movies.length > isMovieCount && movies.length > renderMovies) && isLoading ? (<Preloader/>) : <div className="movies__button-container">
-            <button type="button" onClick={handleClickButton} className="movies__button">Ещё</button>
-          </div>}
-      </section>
+    isLoading ? (<Preloader />) : (<section className={`movies__section ${pathname === '/saved-movies' ? 'movies__section_place_saved-movies' : ''}`}>
+      <ul className="movies__list">
+        {pathname === '/movies' && defaultMovies.map((movie) => (
+          <MoviesCard key={movie.id}
+                      movie={movie}
+                      handleCardLike={handleCardLike}
+                      handleCheckLikeStatus={handleCheckLikeStatus}
+          />))}
+        {pathname === '/saved-movies' && movies.map((movie) => (
+          <MoviesCard key={movie.movieId}
+                      movie={movie}
+                      visibleMovies={true}
+                      handleCardLike={handleCardLike}
+                      handleCheckLikeStatusSavedMovies={handleCheckLikeStatusSavedMovies}/>))}
+      </ul>
+      {pathname !== '/saved-movies'
+      && isLoadingMore ? (<Preloader/>)
+        : ((movies.length > isMovieCount && movies.length > renderMovies) && <div className="movies__button-container">
+          <button type="button" onClick={handleClickButton} className="movies__button">Ещё</button>
+        </div>)}
+    </section>)
   );
 }
 

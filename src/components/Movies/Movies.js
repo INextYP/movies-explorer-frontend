@@ -12,14 +12,16 @@ function Movies({
   handleCardLike,
   handleCheckLikeStatus,
   errorsText,
+  setSearchSavedMovies,
 }) {
-  const [sortMovies, setSortMovies] = useState([]);
-
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     if (isChecked) {
-      setSortMovies(onSortMovies(movies));
+      localStorage.setItem('sortResult', JSON.stringify(onSortMovies(movies)));
+      localStorage.setItem('sortStatus', JSON.stringify(true));
+    } else {
+      localStorage.setItem('sortStatus', JSON.stringify(false));
     }
   }, [isChecked]);
 
@@ -28,9 +30,11 @@ function Movies({
       <SearchForm
         onSearchMovie={onSubmitSearch}
         onSortMovies={setIsChecked}
-        errorsText={errorsText} />
+        errorsText={errorsText}
+        setSearchSavedMovies={setSearchSavedMovies}
+      />
       {errorsText.searchError.length > 0 ? <h2 className='movies__error-text'>{errorsText.searchError}</h2> : (<MoviesCardList
-        movies={isChecked ? sortMovies : movies}
+        movies={isChecked ? movies.filter((movie) => movie.duration <= 40) : movies}
         savedMovies={savedMovies}
         onClick={onClick}
         isLoading={isLoading}

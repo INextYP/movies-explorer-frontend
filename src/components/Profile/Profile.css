@@ -107,6 +107,13 @@
   opacity: .5;
 }
 
+.form__input-error {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #EE3465;
+}
+
 @media screen and (max-width: 890px) {
   .profile {
     padding: 236px 0 269px 0;

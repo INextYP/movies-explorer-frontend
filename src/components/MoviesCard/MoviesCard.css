@@ -91,6 +91,12 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .movie__button-favorite-delete {
+    background: #313131 url("../../images/unfovorite__icon.svg") no-repeat center center;
+  }
+}
+
 @media screen and (max-width: 400px) {
   .movie__description {
     width: 300px;
